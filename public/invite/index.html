@@ -4,26 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tempus+ Invite</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #0F172A; color: white; text-align: center; padding: 20px; }
-    h2 { margin-bottom: 10px; font-weight: 800; }
-    p { color: #94A3B8; margin-bottom: 30px; }
-    button { padding: 16px 32px; font-size: 16px; font-weight: 700; background: #F59E0B; border: none; border-radius: 14px; color: white; cursor: pointer; transition: transform 0.2s; }
-    button:active { transform: scale(0.95); }
-  </style>
 </head>
 <body>
-  <h2>Abriendo Tempus+</h2>
-  <p>Si la aplicación no se abre automáticamente,<br>pulsa el botón de abajo:</p>
-  <button id="open">ABRIR / INSTALAR</button>
+  <h2>Abriendo Tempus+…</h2>
+  <p>Si no se abre automáticamente, pulsa:</p>
+  <button id="open">Abrir / Instalar Tempus+</button>
 
   <script>
     (function () {
-      const parts = window.location.pathname.split('/').filter(Boolean);
-      const inviteId = parts[parts.length - 1] || "";
+      const parts = window.location.pathname.split('/').filter(Boolean); // ["invite", "<id>"]
+      const inviteId = parts[1] || "";
 
-      const playSearch = "https://play.google.com/store/search?q=" + encodeURIComponent("Tempus+") + "&c=apps";
+      const playSearch =
+        "https://play.google.com/store/search?q=" + encodeURIComponent("Tempus+") + "&c=apps";
 
+      // IMPORTANTE: cambia com.tempusplus por tu applicationId real si es distinto.
       const intentUrl =
         "intent://invite/" + encodeURIComponent(inviteId) +
         "#Intent;scheme=tempusplus;package=com.tempusplus;" +
@@ -31,17 +26,11 @@
 
       function go() {
         window.location.href = intentUrl;
-        setTimeout(() => { 
-          if (!document.hidden) {
-            window.location.href = playSearch; 
-          }
-        }, 3000);
+        setTimeout(() => { window.location.href = playSearch; }, 1500);
       }
 
       document.getElementById("open").addEventListener("click", go);
-      
-      // Intentar abrir automáticamente tras un breve delay
-      setTimeout(go, 1000);
+      go();
     })();
   </script>
 </body>
