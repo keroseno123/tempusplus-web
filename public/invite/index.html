@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tempus+ Invite</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #0F172A; color: white; text-align: center; padding: 20px; }
+    h2 { margin-bottom: 10px; font-weight: 800; }
+    p { color: #94A3B8; margin-bottom: 30px; }
+    button { padding: 16px 32px; font-size: 16px; font-weight: 700; background: #F59E0B; border: none; border-radius: 14px; color: white; cursor: pointer; transition: transform 0.2s; }
+    button:active { transform: scale(0.95); }
+  </style>
+</head>
+<body>
+  <h2>Abriendo Tempus+</h2>
+  <p>Si la aplicación no se abre automáticamente,<br>pulsa el botón de abajo:</p>
+  <button id="open">ABRIR / INSTALAR</button>
+
+  <script>
+    (function () {
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      const inviteId = parts[parts.length - 1] || "";
+
+      const playSearch = "https://play.google.com/store/search?q=" + encodeURIComponent("Tempus+") + "&c=apps";
+
+      const intentUrl =
+        "intent://invite/" + encodeURIComponent(inviteId) +
+        "#Intent;scheme=tempusplus;package=com.tempusplus;" +
+        "S.browser_fallback_url=" + encodeURIComponent(playSearch) + ";end";
+
+      function go() {
+        window.location.href = intentUrl;
+        setTimeout(() => { 
+          if (!document.hidden) {
+            window.location.href = playSearch; 
+          }
+        }, 3000);
+      }
+
+      document.getElementById("open").addEventListener("click", go);
+      
+      // Intentar abrir automáticamente tras un breve delay
+      setTimeout(go, 1000);
+    })();
+  </script>
+</body>
+</html>

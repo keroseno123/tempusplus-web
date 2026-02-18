@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tempusplus",
+      "sha256_cert_fingerprints": [
+        "37:89:BC:05:05:EC:22:46:3C:46:80:E6:64:A2:F6:C6:25:C7:8E:EF:53:C4:B3:E8:3B:48:7B:2F:E3:77:BA:6B"
+      ]
+    }
+  }
+]
